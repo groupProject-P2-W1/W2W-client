@@ -90,8 +90,8 @@ label {
     position: relative;
 }
 .card-custom img {
-    height: 200% !important;
-    width: 200% !important;
+    height: 100% !important;
+    width: 100% !important;
     object-fit: cover;
     border-radius: 10px !important;
 }

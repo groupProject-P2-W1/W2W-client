@@ -97,6 +97,7 @@ function showMainPage(e){
     $("#register-page").hide()
     $("#movie-page").hide()
     $("#home-page").show()
+    getPopularMovie()
 }
 
 function logout() {
@@ -111,4 +112,28 @@ function logout() {
 function getPopularMovie() {
     // insert code to enter popular movie here
     // put response in section home-page
+    $("#popular-movie-card").empty()
+    $.ajax({
+        url: "http://localhost:3000/movies/popular",
+        method: "GET",
+        headers: {
+            acces_token: localStorage.getItem("token")
+        }
+    })
+    .done(response => {
+        response.forEach(data => {
+            $("#popular-movie-card").append(`
+            <div class="col-3">
+              <div class="card-custom uk-card uk-card-default uk-card-hover uk-card-body ml-5 mt-4">
+                <i class="bookmark far fa-plus-square"></i>
+                <img src="${data.moviePoster}" alt="image-${data.movieTitle}" onclick="showMoviePage(event)">
+                <p class="text-center">${data.movieTitle}</p>
+              </div>
+            </div>    
+            `)
+        })
+    })
+    .fail((xhr, status) => {
+        console.log(xhr, status);
+    })
 }
