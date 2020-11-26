@@ -6,10 +6,14 @@ $(document).ready(function () {
     if(token){
         $("#login-page").hide()
         $("#register-page").hide()
+        $("#movie-page").show()
+        $("#home-page").show()
     }
     else{
         $("#login-page").show()
         $("#register-page").hide()
+        $("#movie-page").hide()
+        $("#home-page").hide()
     }
 })
 
@@ -30,6 +34,10 @@ function signIn(e){
         console.log(response)
         const token = response.acces_token
         localStorage.setItem("token", token)
+        $("#login-page").hide()
+        $("#register-page").hide()
+        $("#movie-page").show()
+        $("#home-page").show()
         // console.log(response)
     }).fail(xhr => {
         console.log(xhr)
@@ -63,10 +71,14 @@ function showSignUp(e){
     e.preventDefault()
     $("#login-page").hide()
     $("#register-page").show()
+    $("#movie-page").hide()
+    $("#home-page").hide()
 }
 
 function showSignIn(e){
     e.preventDefault()
     $("#login-page").show()
     $("#register-page").hide()
+    $("#movie-page").hide()
+    $("#home-page").hide()
 }
