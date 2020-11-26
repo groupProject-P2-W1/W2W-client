@@ -63,14 +63,14 @@
         <a class="navbar-brand" href="#">What 2 Watch</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
-      
+        </button> 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#" onclick="showMainPage(event)">Home <span class="sr-only">(current)</span></a>
             </li>
           </ul>
+          <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
           <form class="form-inline my-2 my-lg-0" onsubmit="">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-bar">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -79,11 +79,10 @@
       </nav>
       <div class="row">
         <div class="column ml-5 mt-5">
-          <img src="./assets/poster movie.jpg">
-          
+          <img src="./assets/poster movie.jpg">  
         </div>
         <div class="column mx-auto my-5">
-          <H1 > Rising of the shield Hero</H1>
+          <H1> Rising of the shield Hero</H1>
           <p class="mr-5"> The journey when 4 normal teenagers were summoned to a magical world to become heroes that will save their world <br> But when they got there, unfortunately a teenager named Naofumi was very hated by the villagers to the point he became evilish yet still a hero</p>
           <br>
           <table class="table">
@@ -130,13 +129,13 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" onclick="showMainPage(event)" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
           </ul>
+          <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
           <form class="form-inline my-2 my-lg-0" onsubmit="">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-bar">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -149,9 +148,13 @@
           <footer class="blockquote-footer">Popular movies in your area </footer>
         </blockquote>
       </div>
-      <div class="card-custom uk-card uk-card-default uk-card-hover uk-card-body ml-5 mt-4">
-        <i class="bookmark far fa-plus-square"></i>
-        <img src="https://images.unsplash.com/photo-1587613753310-0ba642887227?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0MTc4MH0" alt="image">
+      <div class="row">
+        <div class="col-3">
+          <div class="card-custom uk-card uk-card-default uk-card-hover uk-card-body ml-5 mt-4">
+            <i class="bookmark far fa-plus-square"></i>
+            <img src="./assets/poster movie.jpg" alt="image" onclick="showMoviePage(event)">
+          </div>
+        </div>
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
