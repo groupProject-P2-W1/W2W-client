@@ -7,13 +7,15 @@ $(document).ready(function () {
         $("#login-page").hide()
         $("#register-page").hide()
         $("#movie-page").hide()
-        $("#home-page").show()
+        showMainPage()
+        $("#my-watch-list").hide()
     }
     else{
         $("#login-page").show()
         $("#register-page").hide()
         $("#movie-page").hide()
         $("#home-page").hide()
+        $("#my-watch-list").hide()
     }
 })
 
@@ -39,6 +41,7 @@ function signIn(e){
         $("#movie-page").hide()
         $("#home-page").show()
         // console.log(response)
+        $("#my-watch-list").hide()
     }).fail(xhr => {
         console.log(xhr)
     }).always(_ => {
@@ -62,6 +65,8 @@ function signUp(e){
         // console.log(response)
         $("#login-page").show()
         $("#register-page").hide()
+        $("#movie-page").hide()
+        $("#my-watch-list").hide()
     }).fail(err => {
         console.log(err)
     })
@@ -73,6 +78,7 @@ function showSignUp(e){
     $("#register-page").show()
     $("#movie-page").hide()
     $("#home-page").hide()
+    $("#my-watch-list").hide()
 }
 
 function showSignIn(e){
@@ -81,31 +87,92 @@ function showSignIn(e){
     $("#register-page").hide()
     $("#movie-page").hide()
     $("#home-page").hide()
+    $("#my-watch-list").hide()
 }
 
-function showMoviePage(e){
-    e.preventDefault
-    $("#login-page").hide()
-    $("#register-page").hide()
-    $("#movie-page").show()
-    $("#home-page").hide()
+function showMoviePage(title){
+    console.log(title)
+    $.ajax({
+        url: server + "/movies" + `/?t=${title}`,
+        method: "GET",
+        headers: {
+            acces_token: localStorage.getItem("token")
+        },
+        // params: {
+        //     title: title 
+        // }
+    }).done(response => {
+        console.log(response)
+        $("#login-page").hide()
+        $("#register-page").hide()
+        $("#home-page").hide()
+        $("#single-movie").append(`
+        <div class="column ml-5 mt-5">
+        <img src="${response.Poster}">  
+        </div>
+        <div class="column mx-auto my-5">
+            <H1> ${response.Title}</H1>
+            <p class="mr-5"> ${response.Plot}</p>
+            <br>
+            <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">Actor</th>
+                <th scope="col">Reviewer</th>
+                <th scope="col">Ratings</th>
+                <th scope="col">Production</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">${response.Actors}</th>
+                <td>${response.Ratings[0].Source}</td>
+                <td>${response.Ratings[0].Value}</td>
+                <td>${response.production}</td>
+                </tr>
+                <tr>
+                <th scope="row"></th>
+                <td>Metacritic</td>
+                <td>NaN</td>
+                <td>${response.Director}</td>
+                </tr>
+                <tr>
+                <th scope="row"></th>
+                <td>Rotten Tomatoes</td>
+                <td>76/100</td>
+                <td></td>
+                </tr>
+            </tbody>
+            </table>
+        </div> 
+            `)
+        $("#movie-page").show()
+        $("#my-watch-list").hide()
+    }).fail((xhr, status) => {
+        console.log(xhr, status);
+    })
 }
 
-function showMainPage(e){
-    e.preventDefault
+function showMainPage(){
     $("#login-page").hide()
     $("#register-page").hide()
     $("#movie-page").hide()
     $("#home-page").show()
     getPopularMovie()
+    $("#my-watch-list").hide()
 }
 
 function logout() {
     localStorage.removeItem("token")
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
     $("#login-page").show()
     $("#register-page").hide()
     $("#movie-page").hide()
     $("#home-page").hide()
+    $("#my-watch-list").hide()
     console.log("tombol terclick")
 }
 
@@ -126,11 +193,12 @@ function getPopularMovie() {
             <div class="col-3">
               <div class="card-custom uk-card uk-card-default uk-card-hover uk-card-body ml-5 mt-4">
                 <i class="bookmark far fa-plus-square"></i>
-                <img src="${data.moviePoster}" alt="image-${data.movieTitle}" onclick="showMoviePage(event)">
+                <img src="${data.moviePoster}" alt="image-${data.movieTitle}" onclick='showMoviePage("${data.movieTitle}")'>
                 <p class="text-center">${data.movieTitle}</p>
               </div>
             </div>    
             `)
+            console.log(response)
         })
     })
     .fail((xhr, status) => {
@@ -155,8 +223,14 @@ function onSignIn(googleUser) {
         $("#register-page").hide()
         $("#movie-page").hide()
         $("#home-page").show()
+        $("#my-watch-list").hide()
     })  
     .fail(err => {
         console.log(err)
     })
+}
+
+
+function ListMovie() {
+    const token = localStorage.getItem("token")
 }
