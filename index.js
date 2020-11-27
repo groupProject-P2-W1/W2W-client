@@ -159,7 +159,7 @@ function showMoviePage(title) {
       </div>
       <div class="row">
         <div class="column ml-5 mt-5">
-          <button class="btn btn-primary" onclick="addMovie(${payload})">add to watch list</button>
+          <button class="btn btn-primary" onclick="addMovie('${payload.poster}', '${payload.title}')">add to watch list</button>
         </div>
       </div>`);
       $("#movie-page").show();
@@ -265,6 +265,7 @@ function onSignIn(googleUser) {
 
 function ListMovie() {
   const token = localStorage.getItem("token");
+  $("#movie-list").empty()
   $.ajax({
     url: server + "/movies/watchlist",
     method: "GET",
@@ -278,10 +279,9 @@ function ListMovie() {
             <img src="${el.poster}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">${el.title}</h5>
-            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="#" class="btn btn-danger" onclick="deleteMovie('${el.id}')">Delete</a>
         </div>
     </div>`)
-
       })
   }).fail((xhr, status) => {
     console.log(xhr, status);
@@ -297,8 +297,8 @@ function showMyMovie() {
   ListMovie()
 }
 
-function addMovie({payload}) {
-  console.log(payload)
+function addMovie(poster, title) {
+  console.log(poster, title)
   $.ajax({
     url: server + "/movies/watchlist",
     method: "POST",
@@ -306,12 +306,26 @@ function addMovie({payload}) {
       acces_token: localStorage.getItem("token"),
     },
     data: {
-      title: payload.title,
-      poster: payload.poster
+      title,
+      poster
     }
   }).done(response =>{
-    console.log(response)
+    showMainPage()
   }).fail(err =>{
     console.log(err)
   })
+}
+
+function deleteMovie(id){
+    $.ajax({
+        url: server + `/movies/watchlist/${id}`,
+        method: "DELETE",
+        headers: {
+          acces_token: localStorage.getItem("token"),
+        },
+    }).done(response =>{
+        ListMovie()
+    }).fail(err =>{
+        console.log(err)
+    })
 }
