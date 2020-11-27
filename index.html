@@ -87,13 +87,8 @@
           </form>
         </div>
       </nav>
-      <div class="row" id="single-movie">
-       
-      </div>
-      <div class="row">
-        <div class="column ml-5 mt-5">
-          <button class="btn btn-primary">add to watch list</button>
-        </div>
+      <div id="single-movie">
+        
       </div>
     </section>
 
@@ -111,7 +106,7 @@
               <a class="nav-link" onclick="showMainPage(event)" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#" onclick="">My Watch list</a>
+              <a class="nav-link" href="#" onclick="showMyMovie()">My Watch list</a>
             </li>
           </ul>
           <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
@@ -148,7 +143,7 @@
               <a class="nav-link" onclick="showMainPage(event)" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#" onclick="">My Watch list</a>
+              <a class="nav-link" href="#" onclick="showMyMovie()">My Watch list</a>
             </li>
           </ul>
           <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
@@ -166,15 +161,9 @@
         </blockquote>
       </div>
       
-      <!-- Popular Movie List -->
+      <!-- my - movie - list -->
       <div id="movie-list" class="row px-3 my-3">
-        <div class="card ml-5 mt-5" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <a href="#" class="btn btn-danger">Delete</a>
-          </div>
-        </div>
+        
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
