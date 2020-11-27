@@ -76,6 +76,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="#" onclick="showMainPage(event)">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" onclick="">My Watch list</a>
+            </li>
           </ul>
           <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
           <form class="form-inline my-2 my-lg-0" onsubmit="">
@@ -84,45 +87,8 @@
           </form>
         </div>
       </nav>
-      <div class="row">
-        <div class="column ml-5 mt-5">
-          <img src="./assets/poster movie.jpg">  
-        </div>
-        <div class="column mx-auto my-5">
-          <H1> Rising of the shield Hero</H1>
-          <p class="mr-5"> The journey when 4 normal teenagers were summoned to a magical world to become heroes that will save their world <br> But when they got there, unfortunately a teenager named Naofumi was very hated by the villagers to the point he became evilish yet still a hero</p>
-          <br>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Actor</th>
-                <th scope="col">Reviewer</th>
-                <th scope="col">Ratings</th>
-                <th scope="col">Production</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Naofumi</th>
-                <td>Rotten Tomatoes</td>
-                <td>91%</td>
-                <td>Crunchy Roll</td>
-              </tr>
-              <tr>
-                <th scope="row">Alexander Garcia</th>
-                <td>IMDB</td>
-                <td>9/10</td>
-                <td>Marvel movies</td>
-              </tr>
-              <tr>
-                <th scope="row">Phil swift</th>
-                <td>Metacritic</td>
-                <td>76/100</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="row" id="single-movie">
+       
       </div>
       <div class="row">
         <div class="column ml-5 mt-5">
@@ -144,6 +110,9 @@
             <li class="nav-item active">
               <a class="nav-link" onclick="showMainPage(event)" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" onclick="">My Watch list</a>
+            </li>
           </ul>
           <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
           <form class="form-inline my-2 my-lg-0" onsubmit="">
@@ -162,15 +131,52 @@
       
       <!-- Popular Movie List -->
       <div id="popular-movie-card" class="row  px-3 my-3">
-        <div class="col-3">
-          <div class="card-custom uk-card uk-card-default uk-card-hover uk-card-body ml-5 mt-4">
-            <i class="bookmark far fa-plus-square"></i>
-            <img src="./assets/poster movie.jpg" alt="image" onclick="showMoviePage(event)">
+        
+      </div>
+    </section>
+    <!-- My Watch List -->
+    <section id="my-watch-list">
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">What 2 Watch</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" onclick="showMainPage(event)" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" onclick="">My Watch list</a>
+            </li>
+          </ul>
+          <button class="btn btn-danger mr-3" onclick="logout()">Log out</button>
+          <form class="form-inline my-2 my-lg-0" onsubmit="">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-bar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="mt-5">
+        <blockquote class="blockquote text-center">
+          <p class="mb-0 display-1">My watch list</p>
+          <footer class="blockquote-footer">List of movies you added </footer>
+        </blockquote>
+      </div>
+      
+      <!-- Popular Movie List -->
+      <div id="movie-list" class="row px-3 my-3">
+        <div class="card ml-5 mt-5" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <a href="#" class="btn btn-danger">Delete</a>
           </div>
         </div>
       </div>
     </section>
-
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
