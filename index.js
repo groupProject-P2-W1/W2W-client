@@ -101,7 +101,7 @@ function showMainPage(e){
 }
 
 function logout() {
-    localStorage.removeItem("access_token")
+    localStorage.removeItem("token")
     $("#login-page").show()
     $("#register-page").hide()
     $("#movie-page").hide()
@@ -135,5 +135,28 @@ function getPopularMovie() {
     })
     .fail((xhr, status) => {
         console.log(xhr, status);
+    })
+}
+
+function onSignIn(googleUser) {
+    var google_access_token = googleUser.getAuthResponse().id_token;
+    console.log(google_access_token)
+    $.ajax({
+        method:"POST",
+        url: server + "/users/googleSignIn",
+        data: {
+            google_access_token
+        }
+    })
+    .done(response => {
+        console.log(response)
+        localStorage.setItem("token", response )
+        $("#login-page").hide()
+        $("#register-page").hide()
+        $("#movie-page").hide()
+        $("#home-page").show()
+    })  
+    .fail(err => {
+        console.log(err)
     })
 }
