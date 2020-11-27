@@ -96,6 +96,7 @@ function showSignIn(e) {
 
 function showMoviePage(title) {
   console.log(title);
+  $("#single-movie").empty()
   $.ajax({
     url: server + "/movies" + `/?t=${title}`,
     method: "GET",
@@ -108,12 +109,17 @@ function showMoviePage(title) {
   })
     .done((response) => {
       console.log(response);
+      const payload = {
+        title: response.Title,
+        poster: response.Poster 
+      }
       $("#login-page").hide();
       $("#register-page").hide();
       $("#home-page").hide();
       $("#single-movie").append(`
+      <div class="row" >
         <div class="column ml-5 mt-5">
-        <img src="${response.Poster}">  
+          <img src="${response.Poster}">  
         </div>
         <div class="column mx-auto my-5">
             <H1> ${response.Title}</H1>
@@ -150,7 +156,12 @@ function showMoviePage(title) {
             </tbody>
             </table>
         </div> 
-            `);
+      </div>
+      <div class="row">
+        <div class="column ml-5 mt-5">
+          <button class="btn btn-primary" onclick="addMovie(${payload})">add to watch list</button>
+        </div>
+      </div>`);
       $("#movie-page").show();
       $("#my-watch-list").hide();
       $.ajax({
@@ -254,4 +265,53 @@ function onSignIn(googleUser) {
 
 function ListMovie() {
   const token = localStorage.getItem("token");
+  $.ajax({
+    url: server + "/movies/watchlist",
+    method: "GET",
+    headers: {
+      acces_token: localStorage.getItem("token"),
+    },
+  }).done(response => {
+      response.forEach(el =>{
+        $("#movie-list").append(`
+        <div class="card ml-5 mt-5" style="width: 18rem;">
+            <img src="${el.poster}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">${el.title}</h5>
+            <a href="#" class="btn btn-danger">Delete</a>
+        </div>
+    </div>`)
+
+      })
+  }).fail((xhr, status) => {
+    console.log(xhr, status);
+  });
+}
+
+function showMyMovie() {
+  $("#login-page").hide();
+  $("#register-page").hide();
+  $("#movie-page").hide();
+  $("#home-page").hide();
+  $("#my-watch-list").show();
+  ListMovie()
+}
+
+function addMovie({payload}) {
+  console.log(payload)
+  $.ajax({
+    url: server + "/movies/watchlist",
+    method: "POST",
+    headers: {
+      acces_token: localStorage.getItem("token"),
+    },
+    data: {
+      title: payload.title,
+      poster: payload.poster
+    }
+  }).done(response =>{
+    console.log(response)
+  }).fail(err =>{
+    console.log(err)
+  })
 }
